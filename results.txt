@@ -1,0 +1,5 @@
+FINAL RESULTS
+Office Products -> Movies and TV         | 1.0776     | 2.6350    
+Sports and Outdoors -> CDs and Vinyls    | 0.8528     | 3.9137    
+Android Apps -> Video Games              | 1.5414     | 2.7767    
+Toys and Games -> Automotive             | 1.0010     | 3.9296    

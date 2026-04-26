@@ -1,0 +1,6 @@
+Dataset Pair                             | U-DARec RMSE    | I-DARec RMSE    | DARec RMSE     
+-----------------------------------------------------------------------------------------------
+Office Products -> Movies and TV         | 2.1189          | 0.4697          | 2.5521         
+Sports and Outdoors -> CDs and Vinyls    | 3.5091          | 0.3904          | 3.8644         
+Android Apps -> Video Games              | 2.5603          | 1.3768          | 2.8519         
+Toys and Games -> Automotive             | 3.6097          | 0.8274          | 3.9105         

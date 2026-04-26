@@ -1,0 +1,8 @@
+k=50, Ratings=False -> Ridge: 1.0963, HGBR: 1.1030, RF: 1.1229, DeepMLP: 1.1229
+k=50, Ratings=True -> Ridge: 1.5876, HGBR: 2.4585, RF: 2.5388, DeepMLP: 2.5388
+k=100, Ratings=False -> Ridge: 1.1293, HGBR: 1.1117, RF: 1.1623, DeepMLP: 1.1623
+k=100, Ratings=True -> Ridge: 2.9742, HGBR: 3.2116, RF: 2.8846, DeepMLP: 2.8846
+k=250, Ratings=False -> Ridge: 1.1254, HGBR: 1.0949, RF: 1.1951, DeepMLP: 1.1951
+k=250, Ratings=True -> Ridge: 2.9207, HGBR: 3.0408, RF: 3.1248, DeepMLP: 3.1248
+k=500, Ratings=False -> Ridge: 1.1297, HGBR: 1.1106, RF: 1.1539, DeepMLP: 1.1539
+k=500, Ratings=True -> Ridge: 2.7552, HGBR: 2.7600, RF: 2.7422, DeepMLP: 2.7422

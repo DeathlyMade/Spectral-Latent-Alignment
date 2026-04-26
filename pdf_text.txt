@@ -1,0 +1,468 @@
+Spectral Latent Alignment for Cross-Domain
+Recommendation
+Divyam Sareen*
+IIIT-Bangalore
+Bengaluru, India
+Divyam.Sareen@iiitb.ac.inSubham Agarwala*
+IIIT-Bangalore
+Bengaluru, India
+Subham.Agarwala@iiitb.ac.inDaksh Rajesh*
+IIIT-Bangalore
+Bengaluru, India
+Daksh.Rajesh@iiitb.ac.in
+Abstract—Cross-domain recommendation aims to improve
+recommendations in one domain by using knowledge from
+another related domain. However, many existing approaches
+either require significant overlap between users or items, or rely
+on complex deep learning models that are difficult to train and
+interpret.
+In this work, we propose Spectral Latent Alignment (SLA),
+a simple and interpretable method for cross-domain recom-
+mendation. Instead of directly forcing latent factors or feature
+distributions to match across domains, our approach focuses on
+aligning the structural patterns of user–item interaction graphs.
+We first compute spectral embeddings of each domain using
+the graph Laplacian, which captures the underlying interaction
+structure. We then align these embeddings using a small set of
+anchor correspondences through an orthogonal transformation.
+This approach allows knowledge transfer across domains
+while preserving their individual characteristics. The method
+is computationally efficient, theoretically grounded, and works
+effectively even when overlap between domains is minimal.
+I. INTRODUCTION
+Recommender systems are widely used in modern digital
+platforms such as e-commerce, streaming services, and social
+media. A common challenge in these systems isdata sparsity,
+where the number of user–item interactions is insufficient to
+learn accurate recommendation models. This issue becomes
+especially severe in new domains or platforms where only
+limited interaction data is available.
+Cross-domain recommendation (CDR) aims to address this
+problem by transferring knowledge from a well-established
+domain (source) to another domain with limited data (target).
+For example, information from a movie recommendation sys-
+tem may help improve recommendations in a book or music
+domain.
+Traditional approaches for cross-domain recommendation
+typically rely on shared users or shared items across domains.
+While effective in some cases, these methods become less
+useful when the overlap between domains is small. Recent
+methods based on deep learning attempt to learn domain-
+invariant representations through neural networks and adver-
+sarial training. Although these approaches have shown promis-
+ing results, they often require large datasets and complex
+training procedures.
+In this work, we explore a simpler perspective. Instead of
+aligning raw features or forcing latent factors to be iden-
+tical across domains, we focus on aligning theinteractionstructureof the domains. User–item interactions naturally
+form graphs whose structural patterns can reveal meaningful
+relationships between users and items.
+Based on this observation, we proposeSpectral Latent
+Alignment (SLA). Our method first computes spectral embed-
+dings of the user–item interaction graph in each domain. These
+embeddings capture the main structural properties of the inter-
+action network. Using a small set of anchor correspondences
+between domains, we then align the embedding spaces using
+a simple orthogonal transformation. This alignment enables
+effective knowledge transfer while remaining computationally
+efficient and interpretable.
+II. RELATEDWORK
+Cross-domain recommendation has been widely studied
+as a way to mitigate data sparsity and cold-start problems
+in recommender systems. The central idea is to leverage
+knowledge learned in a data-rich source domain to improve
+recommendation performance in a target domain with limited
+interactions [5].
+A. Matrix Factorization Approaches
+Early work on cross-domain recommendation relied heavily
+on matrix factorization techniques. One of the most influen-
+tial approaches isCollective Matrix Factorization (CMF),
+which jointly factorizes rating matrices from multiple domains
+while sharing latent representations for overlapping users or
+items [2]. By enforcing shared latent factors, CMF allows
+information to propagate across domains. Variants of this
+approach have been explored in several studies that extend
+matrix factorization with domain-specific constraints or shared
+latent spaces [3], [6].
+However, these methods rely strongly on the existence of
+overlapping users or items across domains. When the overlap
+is small or nonexistent, the shared latent factor assumption
+becomes difficult to satisfy and transfer performance degrades
+significantly.
+B. Deep Learning Approaches
+More recent work has explored deep learning models for
+cross-domain recommendation. Neural architectures can learn
+complex nonlinear mappings between latent representations of
+* Equal contribution.
+different domains. For example, neural cross-domain recom-
+mendation models learn domain-specific embeddings and use
+neural networks to map these representations across domains
+[4]. Other approaches integrate autoencoders or multi-task
+learning frameworks to jointly model multiple domains [10].
+While deep neural models can capture complex relation-
+ships between domains, they typically require large training
+datasets and careful hyperparameter tuning. In addition, the
+resulting models are often difficult to interpret.
+C. Adversarial Domain Adaptation
+Another line of research applies adversarial learning to
+reduce domain discrepancy. Domain-Adversarial Neural Net-
+works (DANN) train a feature extractor together with a do-
+main classifier in an adversarial setting so that the learned
+representations are discriminative for the task while being
+indistinguishable across domains [1]. This idea has been
+adopted in several cross-domain recommendation models to
+learn domain-invariant user representations [7].
+Although adversarial methods can reduce domain shift, they
+often require complex optimization procedures and may suffer
+from unstable training dynamics. Moreover, aligning feature
+distributions does not necessarily preserve the structural re-
+lationships between users and items that are essential for
+recommendation tasks.
+D. Graph-Based Recommendation Methods
+Recently, graph-based approaches have gained significant
+attention in recommender systems. Since user–item interac-
+tions naturally form bipartite graphs, graph neural networks
+and spectral methods have been used to capture higher-order
+connectivity patterns in interaction networks [8], [9]. These
+methods highlight the importance of structural information in
+recommendation systems.
+However, most existing graph-based methods focus on im-
+proving recommendation performance within a single domain
+rather than transferring knowledge across domains.
+III. PROPOSEDMETHOD
+We proposeSpectral Latent Alignment (SLA), a method
+that transfers knowledge across domains by aligning the struc-
+tural representations of user–item interaction graphs.
+A. Graph Representation
+Each domain is represented as a bipartite graph consisting of
+users and items. Interactions between users and items form the
+edges of this graph. From this graph we compute thegraph
+Laplacian, which captures the connectivity structure of the
+interaction network.
+Using the Laplacian matrix, we compute the top-keigen-
+vectors to obtain a low-dimensionalspectral embeddingfor
+each node in the graph. These embeddings capture the main
+structural patterns of the user–item interactions.B. Anchor Correspondences
+To align two domains, we assume the availability of a small
+set ofanchor correspondences. These anchors may represent
+shared users, shared item categories, or other semantic links
+between domains.
+LetU SandU Tdenote the spectral embeddings of the source
+and target domains respectively. For the anchor nodes, we
+extract the corresponding embedding rowsU(a)
+SandU(a)
+T.
+C. Embedding Alignment
+We compute an orthogonal transformation matrixQthat
+aligns the source embeddings with the target embeddings by
+solving the following optimization problem:
+ˆQ= arg min
+QTQ=I∥U(a)
+SQ−U(a)
+T∥2
+F
+This is known as theOrthogonal Procrustes problemand
+can be solved efficiently using singular value decomposition
+(SVD).
+The aligned source embeddings are then obtained as
+˜US=USQ
+After alignment, the source and target embeddings lie in a
+shared latent space, enabling knowledge transfer between the
+domains.
+D. Recommendation Transfer
+Once the embeddings are aligned, a recommendation model
+trained on the source domain can be applied to the target
+domain using the aligned representations. This allows infor-
+mation from the source domain to improve recommendations
+in the target domain.
+The main advantages of the proposed approach are:
+•It leverages the structural information of user–item inter-
+action graphs.
+•It requires only a small number of anchor correspon-
+dences.
+•It avoids complex adversarial training procedures.
+•It is computationally efficient and interpretable.
+E. Algorithm
+Algorithm 1Spectral Latent Alignment - Training
+Require:Source interaction matrixR S, target interaction ma-
+trixR T, anchor index setA(sizem), spectral dimension
+k
+Ensure:Trained predictorM, orthogonal alignment bQ
+1:Construct bipartite graphsG SandG TfromR SandR T
+2:Compute normalized graph LaplaciansL SandL T
+3:Compute top-keigenvectors ofL S; formU S∈RnS×k
+4:Compute top-keigenvectors ofL T; formU T∈RnT×k
+5:Extract anchor row-embeddings:
+X←U(A)
+S∈Rm×k, Y←U(A)
+T∈Rm×k
+6:Compute matrixM←X⊤Y
+7:Take SVDM=U MΣMV⊤
+M
+8:Form orthogonal Procrustes estimator bQ←U MV⊤
+M
+9:Form aligned source embeddings eUS←U SbQ
+10:Train predictorMusing eUS.
+11:returnMand bQ=0
+Algorithm 2Spectral Latent Alignment - Inference
+Require:Target interaction matrixR T, source embedding
+matrixU S, orthogonal alignment bQ(returned by Algo-
+rithm 1), trained predictorM(returned by Algorithm 1),
+spectral dimensionk, integerK(top-Krecommendations)
+Ensure:Top-Kranked items for each query user
+1:Construct bipartite graphG TfromR T
+2:Compute normalized LaplacianL TofG T
+3:Compute top-keigenvectors ofL T; formU T∈RnT×k
+4:foreach query userudo
+5:z S←row ofU Scorresponding to useru
+6:z u←zSbQ{map source embedding into target frame}
+7:C u←candidate set of target items
+8:foreach itemi∈ C udo
+9:v i←row ofU Tcorresponding to itemi
+10:s u,i← M(z u, vi)
+11:end for
+12:SortC ubysu,iin descending order
+13:Output top-Kitems for useru
+14:end for=0
+IV. THEORETICALANALYSIS
+In this section we prove a quantitative excess-risk bound for
+the SLA pipeline under the convention that source embeddings
+are rotated into the target frame and a predictor is trained on
+those aligned source embeddings. Concretely, we show that the
+target risk of the trained model is bounded by the source risk
+plus two interpretable contributions: (i) aProcrustes (anchor-
+estimation) termthat scales as√
+k·O 
+∥X⊤E∥2/σmin(X⊤X)
+and therefore decreases with the number and quality of
+anchors, and (ii) aspectral-mismatch term√
+k ε/γcon-
+trolled by the Laplacian perturbationε=∥L T−L S∥2and the source spectral gapγ. An additional term∆ labels
+appears when the conditional label-generating mechanisms
+differ across domains. This decomposition both justifies SLA’s
+two-step design (spectral embedding followed by orthogonal
+alignment) and provides actionable diagnostics: the quantities
+ε, γ, σ min(X⊤X),∥X⊤E∥2are empirically estimable, so the
+bound predicts when alignment should help and suggests
+remedies (e.g., collect more or better anchors, increase anchor
+diversity, or fine-tune on a small target-labelled set) when
+transfer is likely to fail.
+A. Notation and convention
+We adopt the following conventions throughout this proof:
+•LS, LT∈Rn×nare the (normalized) Laplacians of the
+source and target bipartite graphs.
+•US, UT∈Rn×kdenote the top-korthonormal eigenvec-
+tor matrices (rows arek-dimensional node embeddings).
+•Anchors produceX=U(a)
+S∈Rm×kandY=U(a)
+T∈
+Rm×k.
+•bQ∈O(k)is the orthogonal Procrustes estimator defined
+by
+bQ= arg min
+Q∈O(k)∥XQ−Y∥ F
+We therefore interpret bQas mappingsourcecoordinates
+into thetargetcoordinate frame (i.e.U SbQis the source
+embedding expressed in the target frame).
+•LetQ 0∈O(k)denote an orthogonal matrix achieving
+the minimal alignment between the full eigenspaces:
+Q0= arg min
+Q∈O(k)∥USQ−U T∥F
+•We denote by eUS=USbQthealigned sourceembedding
+matrix (source→target).
+•ftgtdenotes the predictor trained on eUS(sof tgtexpects
+inputs in the target frame). We also writef srcfor the
+predictor trained on rawU S. They are related by
+ftgt(z) =f src(bQ⊤z)
+•The squared loss isℓ(f(z), y) = (f(z)−y)2and the
+domain risk isR D(f) =E (z,y)∼D [ℓ(f(z), y)].
+B. Assumptions
+A1 Spectral embeddings:U S, UTare the top-korthonor-
+mal eigenvector matrices ofL SandL T.
+A2 Laplacian perturbation:L T=LS+∆with∥∆∥ 2≤ε.
+A3 Spectral gap: The source LaplacianL Shas a spectral
+gapγ >0at indexk(so the top-keigenspace is
+isolated).
+A4 Anchors: There aremanchor correspondences. Let
+X=U(a)
+S∈Rm×k, Y=U(a)
+T∈Rm×k
+be the anchor row-embeddings (rows come from
+matched nodes). AssumeXhas full column rank.
+A5 Anchor model: The anchor residual matrixE∈Rm×k
+is defined as:
+E=Y−XQ 0=U(a)
+T−U(a)
+SQ0
+A6 Predictor smoothness & bounded embeddings: The
+predictorf tgtisLf-Lipschitz:
+|ftgt(z)−f tgt(z′)| ≤L f∥z−z′∥2∀z, z′∈Rk
+and all embeddings satisfy∥u d,i∥2≤Bfor some finite
+B.
+C. Supporting Lemmas
+We first state two supporting lemmas that we use in the
+main proof:
+Davis-Kahan Theorem: UnderA1-A3the principal-angle
+distance between the top-keigenspaces satisfies
+∥sin Θ(U S, UT)∥2≤∥∆∥ 2
+γ≤ε
+γ
+Consequently,
+min
+Q∈O(k)∥USQ−U T∥F=∥U SQ0−UT∥F≤√
+kε
+γ
+Remark- This is the standard Davis–Kahan perturbation
+bound for eigenspaces; the Frobenius inequality follows from
+∥ · ∥F≤√
+k∥ · ∥ 2for matrices withrank≤k.
+Procrustes Perturbation: LetX∈Rm×khave full column
+rank and letY∈Rm×kbe anchor rows of the target eigen
+space. DefineQ 0and E as above so thatY=XQ 0−E. Let
+bQbe the orthogonal Procrustes solution from(X, Y). If
+∥X⊤E∥2<1
+2σmin(X⊤X)
+then
+∥bQ−Q 0∥2≤2∥X⊤E∥2
+σmin(X⊤X)
+Sketch- SetM=X⊤Y=X⊤XQ 0+X⊤E=A+B. The
+Procrustes solution equals the orthogonal (polar) factorU(M)
+ofM, whileQ 0=U(A). Standard perturbation analysis of
+the polar factor (together with Weyl’s inequalities for singular
+values) yields
+∥U(A+B)−U(A)∥2≤2∥B∥ 2
+σmin(A)
+when∥B∥ 2<1
+2σmin(A). SubstituteA=X⊤XQ 0and
+B=X⊤Eand use thatσ min(A) =σ min(X⊤X)(right-
+multiplication by orthogonalQ 0preserves singular values).
+This gives the claim.
+D. Proof
+Letz T,jdenote the true target embedding of nodej(thej-th
+row ofU T) and letez S,jdenote the aligned-source embedding
+for the same index (thej-th row of eUS=U SbQ).The proof
+proceeds by (i) controlling the change in loss when replacing
+true target embeddings by aligned-source embeddings, (ii)
+isolating any label-distribution discrepancy, and (iii) bounding
+the embedding mismatch via Procrustes and Davis–Kahan
+estimates.Step 1 - Relate prediction risk change to embedding error:
+Sincef tgtisL f-Lipschitz and embeddings are uniformly
+bounded byB, for every indexjand labelywe have
+ℓ(ftgt(zT,j), y)−ℓ(f tgt(ezS,j), y)≤LfB∥z T,j−ezS,j∥2
+Averaging over the target distribution and converting the
+average of row norms to a Frobenius norm via Cauchy–
+Schwarz yields the bound
+R(true)
+T(ftgt)−R(aligned)
+T (ftgt)≤LfB1√n∥eUS−UT∥F
+(1)
+where
+R(true)
+T(ftgt) =E (zT,y)∼T [ℓ(ftgt(zT), y)]
+and
+R(aligned)
+T (ftgt) =E (y)∼T [ℓ(ftgt(ezS), y)]
+Step 2 - Bound difference betweenR(true)
+T(ftgt)and
+RS(ftgt): The source risk offon aligned-source inputs is
+defined by
+RS(ftgt) =E (ezS,y)∼S [ℓ(ftgt(ezS), y)]
+The difference between the target risk evaluated on aligned
+inputs and the source risk decomposes into an explicit label-
+shift term:
+∆labels :=R(aligned)
+T (ftgt)−R S(ftgt)
+=1
+nnX
+j=1
+Ey∼PT(·|j)[ℓ(ftgt(ezS,j), y)]
+−Ey∼PS(·|j)[ℓ(ftgt(ezS,j), y)](2)
+whereP T(· |j)andP S(· |j)are the conditional label
+distributions at indexjin target and source respectively.
+Combining (1) and (2) gives the exact decomposition
+R(true)
+T(ftgt)−R S(ftgt) = 
+R(true)
+T(ftgt)−R(aligned)
+T (ftgt)
++∆labels
+⇒R(true)
+T(ftgt)−R S(ftgt)≤LfB1√n∥eUS−UT∥F+|∆ labels|
+(3)
+If the conditional label mechanism is the same in source and
+target then∆ labels = 0and only the embedding term remains.
+Step 3 - Decompose the embedding matrix error into
+Procrustes error and subspace mismatch: Write eUS=USbQ
+and add-and-subtractU SQ0to obtain
+∥eUS−UT∥F≤ ∥U SbQ−U SQ0∥F+∥U SQ0−UT∥F
+≤√
+k∥bQ−Q 0∥2+∥U SQ0−UT∥F(4)
+since∥U S∥F=√
+k.
+Step 4 - Davis-Kahan bound: By the Davis–Kahan inequality,
+∥USQ0−UT∥F≤√
+kε
+γ(5)
+Step 5 - Procrustes Perturbation: From the Procrustes/polar
+perturbation analysis (valid under the mild small-perturbation
+condition∥X⊤E∥2<1
+2σmin(X⊤X)) we have
+∥bQ−Q 0∥2≤2∥X⊤E∥2
+σmin(X⊤X)(6)
+Step 6 - Conclusion: Substituting (6) and (5) into (4) yields
+∥eUS−UT∥F≤√
+k·2∥X⊤E∥2
+σmin(X⊤X)+√
+kε
+γ
+Inserting this bound into (3) and absorbing1/√ninto the
+constantL fBgives
+R(true)
+T(ftgt)−R S(ftgt)≤LfB√
+k·2∥X⊤E∥2
+σmin(X⊤X)+√
+kε
+γ
+This completes the proof.
+V. BASELINES ANDHYPERPARAMETERS
+VI. OURRESULTS
+VII. CONCLUSION
+REFERENCES
+[1] Yaroslav Ganin, Evgeniya Ustinova, Hana Ajakan, Pascal Germain,
+Hugo Larochelle, Franc ¸ois Laviolette, Mario Marchand, and Victor
+Lempitsky. Domain-Adversarial Training of Neural Networks. Journal
+of Machine Learning Research, 2016.
+[2] Ajit P. Singh and Geoffrey J. Gordon. Relational Learning via Collective
+Matrix Factorization. Proceedings of the 14th ACM SIGKDD Interna-
+tional Conference on Knowledge Discovery and Data Mining (KDD),
+2008.
+[3] Bin Li, Qiang Yang, and Xiangyang Xue. Can Movies and Books
+Collaborate? Cross-Domain Collaborative Filtering for Sparsity Reduc-
+tion. Proceedings of the 21st International Joint Conference on Artificial
+Intelligence (IJCAI), 2009.
+[4] Ali M. Elkahky, Yang Song, and Xiaodong He. A Multi-View Deep
+Learning Approach for Cross Domain User Modeling in Recommenda-
+tion Systems. Proceedings of the 24th International World Wide Web
+Conference (WWW), 2015.
+[5] Iv ´an Cantador, Ignacio Fern ´andez-Tob ´ıas, Shlomo Berkovsky, and Paolo
+Cremonesi. Cross-Domain Recommender Systems. In Recommender
+Systems Handbook, Springer, 2015.
+[6] Rong Hu, Liqiang Nie, and Xindong Wu. Personalized Recommendation
+via Cross-Domain Triadic Factorization. Proceedings of the 22nd
+International World Wide Web Conference (WWW), 2013.
+[7] Fang Liu, Ruiming Tang, Xiuqiang He, Fuzheng Zhang, Ming Zhang,
+and Shaoping Ma. Cross-Domain Recommendation via Collaborative
+Deep Learning. Proceedings of the ACM SIGKDD International
+Conference on Knowledge Discovery and Data Mining (KDD), 2017.
+[8] Rex Ying, Ruining He, Kaifeng Chen, Pong Eksombatchai, William L.
+Hamilton, and Jure Leskovec. Graph Convolutional Neural Networks
+for Web-Scale Recommender Systems. Proceedings of the 24th ACM
+SIGKDD International Conference on Knowledge Discovery and Data
+Mining (KDD), 2018.
+[9] Xiangnan He, Kuan Deng, Xiang Wang, Yan Li, Yongdong Zhang, and
+Meng Wang. LightGCN: Simplifying and Powering Graph Convolution
+Network for Recommendation. Proceedings of the 43rd International
+ACM SIGIR Conference on Research and Development in Information
+Retrieval (SIGIR), 2020.
+[10] Zhen Li and others. Deep Cross-Domain Recommendation. ACM
+Transactions on Information Systems, 2019.

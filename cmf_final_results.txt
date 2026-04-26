@@ -1,0 +1,6 @@
+CMF Final Results (K=50, Alpha=0.5, LR=0.01, WD=0.0001)
+========================
+Office Products -> Movies and TV: 0.9939
+Sports and Outdoors -> CDs and Vinyls: 0.8002
+Android Apps -> Video Games: 1.1367
+Toys and Games -> Automotive: 0.9452
