@@ -1,0 +1,8 @@
+Best RMSE: 1.1283
+Best Params:
+  k: 300
+  use_ratings: False
+  model_type: HGBR
+  hgbr_max_iter: 197
+  hgbr_lr: 0.05936696793913886
+  hgbr_max_depth: 3

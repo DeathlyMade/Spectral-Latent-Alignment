@@ -88,26 +88,26 @@ def train_sla(S_data, T_data, train_indices, test_indices, k=100, epochs=50, lr=
     # Aligned source user embeddings
     U_S_user_aligned = X @ Q
     
-    # 3. Train Predictor on Aligned Source
+    # 3. Train Predictor on target user embs + target item embs → target ratings
+    #    At inference, substitute aligned source user embs (cross-domain transfer)
     model = MLPPredictor(input_dim=k * 2)
     optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=1e-5)
     criterion = nn.MSELoss()
     
-    # Prepare training data from source
-    # We use all interactions in S_data from train_indices
-    u_idx, i_idx = np.where(S_data[train_indices] > 0)
-    # the actual user index is train_indices[u_idx]
+    # Prepare training data: target domain interactions from train users
+    # Use clean target user embeddings + target item embeddings → target ratings
+    u_idx, i_idx = np.where(T_data[train_indices] > 0)
     real_u_idx = train_indices[u_idx]
-    ratings = S_data[real_u_idx, i_idx]
+    ratings = T_data[real_u_idx, i_idx]
     
     train_dataset = TensorDataset(
-        torch.tensor(U_S_user_aligned[real_u_idx], dtype=torch.float32),
-        torch.tensor(U_S_item[i_idx], dtype=torch.float32),
+        torch.tensor(U_T_user[real_u_idx], dtype=torch.float32),
+        torch.tensor(U_T_item[i_idx], dtype=torch.float32),
         torch.tensor(ratings, dtype=torch.float32)
     )
     train_loader = DataLoader(train_dataset, batch_size=256, shuffle=True)
     
-    print("Training predictor on Source domain...")
+    print("Training predictor on Target domain (target users + target items)...")
     model.train()
     for ep in range(epochs):
         total_loss = 0
@@ -120,17 +120,18 @@ def train_sla(S_data, T_data, train_indices, test_indices, k=100, epochs=50, lr=
             total_loss += loss.item() * len(b_r)
         
         if ep % 10 == 0:
-            print(f"Epoch {ep}, Source Loss: {total_loss / len(train_dataset):.4f}")
+            print(f"Epoch {ep}, Target Loss: {total_loss / len(train_dataset):.4f}")
             
     # 4. Evaluate on Target Domain
-    # The target uses U_T_user and U_T_item
+    # Inference: use ALIGNED SOURCE user embs + target item embs (cross-domain transfer)
     model.eval()
     u_idx_test, i_idx_test = np.where(T_data[test_indices] > 0)
     real_u_idx_test = test_indices[u_idx_test]
     target_ratings = T_data[real_u_idx_test, i_idx_test]
     
     with torch.no_grad():
-        test_u = torch.tensor(U_T_user[real_u_idx_test], dtype=torch.float32)
+        # Cross-domain transfer: aligned source user embeddings at test time
+        test_u = torch.tensor(U_S_user_aligned[real_u_idx_test], dtype=torch.float32)
         test_i = torch.tensor(U_T_item[i_idx_test], dtype=torch.float32)
         preds = model(test_u, test_i).numpy()
         
