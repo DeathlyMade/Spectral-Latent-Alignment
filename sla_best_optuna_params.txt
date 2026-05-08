@@ -1,8 +1,23 @@
-Best RMSE: 1.1283
+Best RMSE: 1.1887
+CMF Baseline: 0.9925
+Does not beat CMF yet.
+
 Best Params:
   k: 300
-  use_ratings: False
-  model_type: HGBR
-  hgbr_max_iter: 197
-  hgbr_lr: 0.05936696793913886
-  hgbr_max_depth: 3
+  model_type: LightGBM
+  lgb_n_estimators: 408
+  lgb_lr: 0.031180345586184193
+  lgb_max_depth: 11
+  lgb_num_leaves: 114
+  lgb_subsample: 0.7553865456047926
+  lgb_colsample: 0.8985548992684733
+  lgb_reg_alpha: 0.025839493370082733
+  lgb_reg_lambda: 0.00011147011126221993
+  lgb_min_child_samples: 36
+
+Top 5 Trials:
+  #1: RMSE=1.1887 | {'k': 300, 'model_type': 'LightGBM', 'lgb_n_estimators': 408, 'lgb_lr': 0.031180345586184193, 'lgb_max_depth': 11, 'lgb_num_leaves': 114, 'lgb_subsample': 0.7553865456047926, 'lgb_colsample': 0.8985548992684733, 'lgb_reg_alpha': 0.025839493370082733, 'lgb_reg_lambda': 0.00011147011126221993, 'lgb_min_child_samples': 36}
+  #2: RMSE=1.1941 | {'k': 300, 'model_type': 'LightGBM', 'lgb_n_estimators': 443, 'lgb_lr': 0.034919980723187236, 'lgb_max_depth': 12, 'lgb_num_leaves': 49, 'lgb_subsample': 0.9775225184444913, 'lgb_colsample': 0.9726033822186724, 'lgb_reg_alpha': 0.07902651255615975, 'lgb_reg_lambda': 0.7246412405627725, 'lgb_min_child_samples': 32}
+  #3: RMSE=1.1964 | {'k': 250, 'model_type': 'LightGBM', 'lgb_n_estimators': 306, 'lgb_lr': 0.03510076077221875, 'lgb_max_depth': 12, 'lgb_num_leaves': 113, 'lgb_subsample': 0.7890728397027427, 'lgb_colsample': 0.7420212154779172, 'lgb_reg_alpha': 0.22236408081540657, 'lgb_reg_lambda': 0.03448274624722395, 'lgb_min_child_samples': 45}
+  #4: RMSE=1.1975 | {'k': 300, 'model_type': 'LightGBM', 'lgb_n_estimators': 355, 'lgb_lr': 0.017983182638649935, 'lgb_max_depth': 8, 'lgb_num_leaves': 93, 'lgb_subsample': 0.8385371508380682, 'lgb_colsample': 0.8398809180498136, 'lgb_reg_alpha': 0.002108746204102254, 'lgb_reg_lambda': 0.00017849815658363646, 'lgb_min_child_samples': 26}
+  #5: RMSE=1.1991 | {'k': 300, 'model_type': 'LightGBM', 'lgb_n_estimators': 387, 'lgb_lr': 0.023162674607831207, 'lgb_max_depth': 10, 'lgb_num_leaves': 98, 'lgb_subsample': 0.8629863348661677, 'lgb_colsample': 0.852135010388983, 'lgb_reg_alpha': 6.917198340920235, 'lgb_reg_lambda': 9.192790789559038e-06, 'lgb_min_child_samples': 18}

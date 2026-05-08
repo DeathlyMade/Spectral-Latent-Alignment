@@ -1,0 +1,12 @@
+CDR Benchmark  –  2026-05-09 02:51:12
+==========================================================================================
+  Dataset                                    Model      Epochs     RMSE         Time      
+  ──────────────────────────────────────────────────────────────────────────────────
+  Office Products → Movies and TV            SLA        50         1.2064       46.2s     
+  Office Products → Movies and TV            CMF        50         1.1723       1m 28.1s  
+  Sports and Outdoors → CDs and Vinyls       SLA        50         0.9902       46.5s     
+  Sports and Outdoors → CDs and Vinyls       CMF        50         0.7943       1m 4.9s   
+  Android Apps → Video Games                 SLA        50         1.1858       14.1s     
+  Android Apps → Video Games                 CMF        50         1.1533       13.7s     
+  Toys and Games → Automotive                SLA        50         1.0852       29.4s     
+  Toys and Games → Automotive                CMF        50         1.0181       15.4s     
