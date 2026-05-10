@@ -1,10 +1,10 @@
 FINAL COMPARISON: HYBRID SLA-CMF VS BASELINE CMF
-Hyperparameters: K=25, Alpha=0.593325, LR=0.000311, WD=0.00000160
+Hyperparameters: K=100, Alpha=0.296580, LR=0.017524, WD=0.00011006
 ==============================================================================================================
 
 Dataset Pair                               Historical CMF    Local CMF   Hybrid Model    Improv. (%)
 ----------------------------------------------------------------------------------------------------
-Office Products -> Movies and TV                   0.9939       1.1098         1.0938        -10.05%
-Sports and Outdoors -> CDs and Vinyls              0.8002       0.8372         0.8265         -3.29%
-Android Apps -> Video Games                        1.1367       1.0969         1.0737          5.54%
-Toys and Games -> Automotive                       0.9452       1.0879         1.0795        -14.21%
+Office Products -> Movies and TV                   0.9939       1.0854         1.0869         -9.36%
+Sports and Outdoors -> CDs and Vinyls              0.8002       0.8165         0.8198         -2.45%
+Android Apps -> Video Games                        1.1367       1.0556         1.0679          6.05%
+Toys and Games -> Automotive                       0.9452       1.0765         1.0759        -13.83%
