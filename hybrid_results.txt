@@ -1,0 +1,10 @@
+HYBRID SLA-CMF RESULTS (Strategy C: SLA-Initialized CMF)
+Hyperparams: k=50, alpha=0.5, lr=0.01, wd=0.0001, epochs=50
+==========================================================================================
+
+Dataset Pair                                         CMF    H-Aligned    Improved?
+----------------------------------------------------------------------------------
+Office Products -> Movies and TV                  1.1222       1.1217          YES
+Sports and Outdoors -> CDs and Vinyls             0.8219       0.8209          YES
+Android Apps -> Video Games                       1.0586       1.0587           no
+Toys and Games -> Automotive                      1.0755       1.0741          YES

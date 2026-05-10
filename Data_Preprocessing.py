@@ -100,8 +100,8 @@ class Mydata(Dataset):
         return self.S_data.shape[0]
 
 if __name__ == "__main__":
-    data = Mydata(r'./Data/Books.csv',
-                  r'./Data/Movies_and_TV.csv', train=True, preprocessed=False)
+    data = Mydata(r'./Data/ratings_Toys_and_Games.csv',
+                  r'./Data/ratings_Video_Games.csv', train=True, preprocessed=False)
 
     dataloader = DataLoader(data, batch_size=8, shuffle=False)
     for d in dataloader:

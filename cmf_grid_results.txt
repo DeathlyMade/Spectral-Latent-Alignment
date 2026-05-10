@@ -1,26 +1,2 @@
 CMF Grid Search Results
 ========================
-K=50, Alpha=0.2, LR=0.01, WD=0.0001 -> RMSE: 0.9953
-K=50, Alpha=0.2, LR=0.01, WD=0.001 -> RMSE: 1.0569
-K=50, Alpha=0.2, LR=0.005, WD=0.0001 -> RMSE: 0.9969
-K=50, Alpha=0.2, LR=0.005, WD=0.001 -> RMSE: 1.0575
-K=50, Alpha=0.5, LR=0.01, WD=0.0001 -> RMSE: 0.9925
-K=50, Alpha=0.5, LR=0.01, WD=0.001 -> RMSE: 1.0505
-K=50, Alpha=0.5, LR=0.005, WD=0.0001 -> RMSE: 0.9957
-K=50, Alpha=0.5, LR=0.005, WD=0.001 -> RMSE: 1.0516
-K=50, Alpha=0.8, LR=0.01, WD=0.0001 -> RMSE: 1.0084
-K=50, Alpha=0.8, LR=0.01, WD=0.001 -> RMSE: 1.0508
-K=50, Alpha=0.8, LR=0.005, WD=0.0001 -> RMSE: 1.0094
-K=50, Alpha=0.8, LR=0.005, WD=0.001 -> RMSE: 1.0509
-K=100, Alpha=0.2, LR=0.01, WD=0.0001 -> RMSE: 0.9935
-K=100, Alpha=0.2, LR=0.01, WD=0.001 -> RMSE: 1.0574
-K=100, Alpha=0.2, LR=0.005, WD=0.0001 -> RMSE: 0.9963
-K=100, Alpha=0.2, LR=0.005, WD=0.001 -> RMSE: 1.0575
-K=100, Alpha=0.5, LR=0.01, WD=0.0001 -> RMSE: 0.9938
-K=100, Alpha=0.5, LR=0.01, WD=0.001 -> RMSE: 1.0500
-K=100, Alpha=0.5, LR=0.005, WD=0.0001 -> RMSE: 0.9948
-K=100, Alpha=0.5, LR=0.005, WD=0.001 -> RMSE: 1.0513
-K=100, Alpha=0.8, LR=0.01, WD=0.0001 -> RMSE: 1.0092
-K=100, Alpha=0.8, LR=0.01, WD=0.001 -> RMSE: 1.0501
-K=100, Alpha=0.8, LR=0.005, WD=0.0001 -> RMSE: 1.0092
-K=100, Alpha=0.8, LR=0.005, WD=0.001 -> RMSE: 1.0509

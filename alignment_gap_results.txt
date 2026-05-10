@@ -1,0 +1,11 @@
+ALIGNMENT GAP RESULTS
+================================================================================
+Alignment Gap = RMSE(Cross-Domain) - RMSE(Oracle Theoretical Limit)
+A LOWER gap means better cross-domain transfer.
+
+Dataset Pair                             SLA Oracle  SLA Cross    SLA Gap CMF Oracle  CMF Cross    CMF Gap
+----------------------------------------------------------------------------------------------------------
+Office Products -> Movies and TV             1.0765     1.0998     0.0233     0.9878     1.0979     0.1101
+Sports and Outdoors -> CDs and Vinyls        0.9805     1.0168     0.0362     0.8963     0.9607     0.0643
+Android Apps -> Video Games                  1.2195     1.2337     0.0142     0.8191     1.1773     0.3582
+Toys and Games -> Automotive                 1.1058     1.1181     0.0123     0.9055     1.0732     0.1677

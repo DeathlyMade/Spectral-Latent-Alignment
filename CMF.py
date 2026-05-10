@@ -149,10 +149,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     dataset_pairs = [
-        (r"d:\Recsys\ratings_Office_Products.csv", r"d:\Recsys\ratings_Movies_and_TV.csv", "Office Products -> Movies and TV"),
-        (r"d:\Recsys\ratings_Sports_and_Outdoors.csv", r"d:\Recsys\ratings_CDs_and_Vinyl.csv", "Sports and Outdoors -> CDs and Vinyls"),
-        (r"d:\Recsys\ratings_Apps_for_Android.csv", r"d:\Recsys\ratings_Video_Games.csv", "Android Apps -> Video Games"),
-        (r"d:\Recsys\ratings_Toys_and_Games.csv", r"d:\Recsys\ratings_Automotive.csv", "Toys and Games -> Automotive")
+        (r"./Data/ratings_Toys_and_Games.csv", r"./Data/ratings_Video_Games.csv", "Toys and Games -> Video Games"),
+    #     (r"d:\Recsys\ratings_Sports_and_Outdoors.csv", r"d:\Recsys\ratings_CDs_and_Vinyl.csv", "Sports and Outdoors -> CDs and Vinyls"),
+    #     (r"d:\Recsys\ratings_Apps_for_Android.csv", r"d:\Recsys\ratings_Video_Games.csv", "Android Apps -> Video Games"),
+    #     (r"d:\Recsys\ratings_Toys_and_Games.csv", r"d:\Recsys\ratings_Automotive.csv", "Toys and Games -> Automotive")
+    # ]
     ]
     
     if args.mode == 'grid':
